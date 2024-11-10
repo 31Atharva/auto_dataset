@@ -1,0 +1,18 @@
+{
+    "model_type": "RandomForestRegressor",
+    "n_estimators": 100,
+    "random_state": 42,
+    "features": [
+        "length",
+        "curb-weight",
+        "engine-size",
+        "city-mpg",
+        "highway-mpg",
+        "make_9",
+        "drive-wheels_1",
+        "drive-wheels_2",
+        "num-of-cylinders_four",
+        "num-of-cylinders_six"
+    ],
+    "target": "target_price"
+}

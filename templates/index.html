@@ -4,71 +4,66 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medical Insurance Charges Prediction</title>
+    <title>Auto Price Prediction</title>
 </head>
 
 <body style="background-color: rgb(70, 114, 196);">
 
-    <h1> Medical Insurance Charges Prediction </h1>
-    <form method="GET" action="/predict_charges">
+    <h1> Auto Price Prediction </h1>
+    <form method="GET" action="/predict_price">
 
-        <label>Age:</label>
-        <input type = "text" name = "age">
+        <label>Length:</label>
+        <input type="text" name="length" required>
+        <br><br>
+
+        <label>Curb Weight:</label>
+        <input type="text" name="curb_weight" required>
+        <br><br>
+
+        <label>Engine Size:</label>
+        <input type="text" name="engine_size" required>
+        <br><br>
+
+        <label>City MPG:</label>
+        <input type="text" name="city_mpg" required>
+        <br><br>
+
+        <label>Highway MPG:</label>
+        <input type="text" name="highway_mpg" required>
+        <br><br>
+
+        <label>Car Make:</label>
+        <select name="make" required>
+            <option value="1">Make 1</option>
+            <option value="2">Make 2</option>
+            <option value="3">Make 3</option>
+            <!-- Add more makes as per your dataset -->
         </select>
+        <br><br>
 
-        <br>
-        <br>
-
-        <label>Sex:</label>
-        <select name = "sex">
-            <option value = "male">Male</option>
-            <option value = "female">Female</option>
+        <label>Drive Wheels:</label>
+        <select name="drive_wheels" required>
+            <option value="1">Front-wheel Drive</option>
+            <option value="2">Rear-wheel Drive</option>
+            <option value="3">All-wheel Drive</option>
         </select>
+        <br><br>
 
-        <br>
-        <br>
-
-        <label>BMI:</label>
-        <input type = "text" name = "bmi">
+        <label>Number of Cylinders:</label>
+        <select name="num_of_cylinders" required>
+            <option value="four">Four</option>
+            <option value="six">Six</option>
+            <option value="eight">Eight</option>
         </select>
+        <br><br>
 
-        <br>
-        <br>
+        <input type="submit" value="Get Predicted Price">
 
-        <label>Children:</label>
-        <input type = "text" name = "children">
-        </select>
+        <br><br>
 
-        <br>
-        <br>
-
-        <label>Smoker:</label>
-        <label>Yes:</label> <input type = "radio" name= "smoker" value = "yes">
-        <label>No:</label> <input type = "radio" name= "smoker" value = "no">
-
-        <br>
-        <br>
-
-        <label>Region:</label>
-        <select name = "region">
-            <option value = "northeast">Northeast</option>
-            <option value = "southeast">Southeast</option>
-            <option value = "northwest">Northwest</option>
-            <option value = "southwest">Southwest</option>
-        </select>
-
-        <br>
-        <br>
-
-        <input type = "submit" value="Please Click Here">
-
-        <br>
-
-        <p>Dear Sir/Mam, Your premium insurance charges will be <b> {{ prediction }} /- Rs.</b> Only </p>
-
+        <p>Dear Sir/Mam, Your predicted car price is <b>{{ prediction }} USD</b> Only.</p>
 
     </form>
-
 
 </body>
 </html>

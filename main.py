@@ -1,60 +1,59 @@
-
-
 from flask import Flask, jsonify, render_template, request
-from models.utils import MedicalInsurance
+from models.utils import Auto  # Import the Auto class for car price prediction
 app = Flask(__name__)
 
 @app.route('/')
 def hello_flask():
-    print("Dear Sir/Mam, Welcome to Medicle Insurance Charges Prediction")
+    print("Dear Sir/Mam, Welcome to Car Price Prediction")
     return render_template("index.html")
 
-@app.route('/predict_charges', methods = ["POST", "GET"])
-def get_insurance_charges():
-
+@app.route('/predict_price', methods=["POST", "GET"])
+def get_car_price():
     if request.method == "GET":
         print("We are using GET Method")
 
-        #data = request.form
-        #print("Data ::",data)
-        #age = eval(data['age'])
-        #sex = data['sex']
-        #bmi = eval(data['bmi'])
-        #children = eval(data['children'])
-        #smoker = data['smoker']
-        #region = data['region']
-        
-        age = int(request.args.get("age"))
-        sex = request.args.get("sex")
-        bmi = float(request.args.get("bmi"))
-        children = int(request.args.get("children"))
-        smoker = request.args.get("smoker")
-        region = request.args.get("region")
+        # Retrieve form data from the user input in the HTML form
+        length = float(request.args.get("length"))
+        curb_weight = float(request.args.get("curb_weight"))
+        engine_size = float(request.args.get("engine_size"))
+        city_mpg = float(request.args.get("city_mpg"))
+        highway_mpg = float(request.args.get("highway_mpg"))
+        make = request.args.get("make")
+        drive_wheels = request.args.get("drive_wheels")
+        num_of_cylinders = request.args.get("num_of_cylinders")
 
-        print("age, sex, bmi, children, smoker, region\n",age, sex, bmi, children, smoker, region)
+        print("Received Data -> Length:", length, ", Curb Weight:", curb_weight, ", Engine Size:", engine_size,
+              ", City MPG:", city_mpg, ", Highway MPG:", highway_mpg, ", Make:", make, ", Drive Wheels:", drive_wheels,
+              ", Number of Cylinders:", num_of_cylinders)
 
-        med_ins = MedicalInsurance(age, sex, bmi, children, smoker, region)
-        charges = med_ins.get_predicted_price()
-        
-        return render_template("index.html", prediction = charges)
+        # Initialize Auto class with provided values
+        auto_predict = Auto(length, curb_weight, engine_size, city_mpg, highway_mpg, make, drive_wheels, num_of_cylinders)
+        predicted_price = auto_predict.get_predicted_price()
 
-        #return jsonify({"Result" : f"Predicted Charges for Medical Insurance is {charges}/- Rs. Only"})
+        return render_template("index.html", prediction=predicted_price)  # Return the prediction to the template
+
     else:
         print("We are using POST Method")
 
-        age = int(request.form.get("age"))
-        sex = request.form.get("sex")
-        bmi = float(request.form.get("bmi"))
-        children = int(request.form.get("children"))
-        smoker = request.form.get("smoker")
-        region = request.form.get("region")
+        # Retrieve form data from the user input in the HTML form
+        length = float(request.form.get("length"))
+        curb_weight = float(request.form.get("curb_weight"))
+        engine_size = float(request.form.get("engine_size"))
+        city_mpg = float(request.form.get("city_mpg"))
+        highway_mpg = float(request.form.get("highway_mpg"))
+        make = request.form.get("make")
+        drive_wheels = request.form.get("drive_wheels")
+        num_of_cylinders = request.form.get("num_of_cylinders")
 
-        print("age, sex, bmi, children, smoker, region\n",age, sex, bmi, children, smoker, region)
+        print("Received Data -> Length:", length, ", Curb Weight:", curb_weight, ", Engine Size:", engine_size,
+              ", City MPG:", city_mpg, ", Highway MPG:", highway_mpg, ", Make:", make, ", Drive Wheels:", drive_wheels,
+              ", Number of Cylinders:", num_of_cylinders)
 
-        med_ins = MedicalInsurance(age, sex, bmi, children, smoker, region)
-        charges = med_ins.get_predicted_price()
+        # Initialize Auto class with provided values
+        auto_predict = Auto(length, curb_weight, engine_size, city_mpg, highway_mpg, make, drive_wheels, num_of_cylinders)
+        predicted_price = auto_predict.get_predicted_price()
 
-        return render_template("index.html", prediction = charges)
+        return render_template("index.html", prediction=predicted_price)  # Return the prediction to the template
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0' , port= 5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
